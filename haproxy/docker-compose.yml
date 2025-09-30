@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+
+  proxy:
+    container_name: "proxy"
+    image: "haproxy:3.2"
+    user: root
+    ports:
+      - "80:80"
+      - "443:443"
+      - "1936:1936"
+    restart: always
+    networks:
+      - "default"
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+      - ./ssl/:/ssl/
+    environment:
+      DEBUG: "*"
+
+networks:
+ default:
+   name: elastic
+   external: false
