@@ -1,0 +1,22 @@
+config:
+  # Receive events from 24224/tcp
+  # This is used by log forwarding and the fluent-cat command
+  - source:
+      $type: forward
+      port: 24224
+
+  # http://<ip>:9880/myapp.access?json={"event":"data"}
+  - source:
+      $type: http
+      port: 9880
+  
+  - filter:
+      $tag: myapp.access
+      $type: record_transformer
+      record:
+        host_param: !fluent/s "#{Socket.gethostname}"
+
+  - match:
+      $tag: myapp.access
+      $type: file
+      path: /var/log/fluent/access
