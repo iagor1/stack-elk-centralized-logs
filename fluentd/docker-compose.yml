@@ -2,7 +2,8 @@ version: "3.8"
 
 services:
  fluentd:
-   image: fluent/fluentd:v1.16-2
+   #image: fluent/fluentd:v1.16-2
+   build: ./fluentd
    user: root
    volumes:
      - "./fluentd/conf:/fluentd/etc"
@@ -10,8 +11,10 @@ services:
      - "/var/run/docker.sock:/var/run/docker.sock:ro"
    networks:
       - "glpi-network"
-   #command: ["--environment", "container"]
    restart: on-failure
+   ports:
+     - "24224:24224"
+     - "24224:24224/udp"
 networks:
   glpi-network:
     external: true
