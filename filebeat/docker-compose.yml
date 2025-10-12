@@ -1,0 +1,28 @@
+version: "3.8"
+
+volumes:
+ filebeatdata01:
+   driver: local
+
+services:
+ filebeat01:
+   image: docker.elastic.co/beats/filebeat:8.17.0
+   user: root
+   volumes:
+     - filebeatdata01:/usr/share/filebeat/data
+     - "./filebeat_ingest_data/:/usr/share/filebeat/ingest_data/"
+     - "./filebeat.yml:/usr/share/filebeat/filebeat.yml:ro"
+     - "/var/lib/docker/containers:/var/lib/docker/containers:ro"
+     - "/var/run/docker.sock:/var/run/docker.sock:ro"
+   environment:
+     - ELASTIC_USER=${ELASTIC_USER}
+     - ELASTICSEARCH_PASSWORD=${ELASTIC_PASSWORD}
+     - ELASTIC_HOSTS=${ELASTIC_HOSTS}:9200
+     - KIBANA_HOSTS=${KIBANA_HOSTS}:443
+   networks:
+      - "glpi-network"
+   command: ["--environment", "container"]
+   restart: on-failure
+networks:
+  glpi-network:
+    external: true
