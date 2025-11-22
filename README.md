@@ -140,3 +140,8 @@ Logs are automatically parsed with fields:
 View HAProxy stats at `http://your-server:8404/stats` (configure credentials in `haproxy.cfg`).
 
 Metricbeat sends system metrics to Elasticsearch for monitoring cluster health.
+
+## Evidence
+<img width="1895" height="1020" alt="home kibana" src="https://github.com/user-attachments/assets/5d9c6eab-8c2a-4877-b497-754e10d26a0c" />
+<img width="1890" height="1029" alt="Discover Kibana" src="https://github.com/user-attachments/assets/d3c70ec6-f349-4e9f-acc4-226b123b2c9c" />
+<img width="1890" height="1029" alt="Discover Kibana 2" src="https://github.com/user-attachments/assets/9314d1ff-d6ba-4601-b086-72833195419d" />
